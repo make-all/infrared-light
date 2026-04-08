@@ -35,7 +35,7 @@ from homeassistant.helpers.selector import (
     SelectSelectorMode,
 )
 
-from .const import DOMAIN, CONF_CONFIG_FILE, CONF_INFRARED_ENTITY_ID
+from .const import DOMAIN, CONF_CONFIG, CONF_INFRARED_ENTITY_ID
 from .lib.common import load_config, list_config_options
 
 _LOGGER = logging.getLogger(__name__)
@@ -53,7 +53,7 @@ class ConfigFlowHandler(ConfigFlow):
         """Handle the user config step."""
         if user_input is not None:
             emitter_id = user_input[CONF_INFRARED_ENTITY_ID]
-            config_file = user_input[CONF_CONFIG_FILE]
+            config_file = user_input[CONF_CONFIG]
             await self.async_set_unique_id(f"ir_light_{config_file}_{emitter_id}")
             self._abort_if_unique_id_configured()
 
@@ -95,7 +95,7 @@ class ConfigFlowHandler(ConfigFlow):
             step_id="user",
             data_schema=vol.Schema(
                 {
-                    vol.Required(CONF_CONFIG_FILE): SelectSelector(
+                    vol.Required(CONF_CONFIG): SelectSelector(
                         SelectSelectorConfig(
                             options=[configs],
                             mode=SelectSelectorMode.DROPDOWN,
