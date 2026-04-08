@@ -17,8 +17,7 @@ limitations under the License.
 
 """
 
-from importlib.resources import path
-from os import scandir
+from importlib.resources import files, path
 from os.path import dirname, join
 
 from homeassistant.helpers.selector import SelectOptionDict
@@ -38,7 +37,9 @@ def load_config(fname: str):
 
 def list_configs():
     confdir = path("custom_components.infrared_light.devices")
-    return [f.name[:-5] for f in scandir(confdir) if f.name.endswith(".yaml")]
+    return [
+        f.name[:-5] for f in files(confdir) if f.is_file() and f.name.endswith(".yaml")
+    ]
 
 
 def list_config_options():
