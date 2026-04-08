@@ -17,29 +17,22 @@ limitations under the License.
 
 """
 
-from importlib.resources import files, path
-from os.path import dirname, join
+from importlib.resources import contents, open_text
 
 from homeassistant.helpers.selector import SelectOptionDict
 from homeassistant.util.yaml import load_yaml
 
 
 def load_config(fname: str):
-    fname = join(
-        path("custom_components.infrared_light.devices"),
-        config_entry.data["config_file"] + ".yaml",
-    )
-    if not exists(fname):
-        raise FileNotFoundError(f"Config file {fname} does not exist")
-    with open(fname) as f:
+    with open_text("custom_components.infrared_light.devices", fname + ".yaml") as f:
         return load_yaml(f)
 
 
 def list_configs():
     return [
-        f.name[:-5]
-        for f in files("custom_components.infrared_light.devices")
-        if f.is_file() and f.name.endswith(".yaml")
+        f[:-5]
+        for f in contents("custom_components.infrared_light.devices")
+        if f.endswith(".yaml")
     ]
 
 
