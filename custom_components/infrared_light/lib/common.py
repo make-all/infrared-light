@@ -48,14 +48,14 @@ def list_config_options():
     # Ensure options are unique by label, disambiguating duplicates by appending value to the label
     seen_labels = set()
     duplicates = set()
-    for option in options:
-        if option["label"] in seen_labels:
-            duplicates.add(option["label"])
+    for o in options:
+        if o["label"] in seen_labels:
+            duplicates.add(o["label"])
         else:
-            seen_labels.add(option["label"])
+            seen_labels.add(o["label"])
 
-    for option in options:
-        if option["label"] in duplicates:
-            option["label"] += f" ({option['value']})"
+    for o in options:
+        if o["label"] in duplicates:
+            o["label"] += f" ({o['value']})"
 
     return options
