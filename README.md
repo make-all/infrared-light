@@ -1,3 +1,5 @@
+**This software is currently alpha quality** Once it is working for the author, this message will be updated, but until then, please do not download it expecting it to work. Bug reports are not needed at this time and will only overload the developer.
+
 ![logo](custom_components/infrared_light/brand/icon.svg)
 
 Please report any [issues](https://github.com/make-all/infrared-light/issues) and feel free to raise [pull requests](https://github.com/make-all/infrared-light/pulls).
