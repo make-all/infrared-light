@@ -1,4 +1,4 @@
-![logo](custom_component/infrared_light/brand/icon.svg)
+![logo](custom_components/infrared_light/brand/icon.svg)
 
 Please report any [issues](https://github.com/make-all/infrared-light/issues) and feel free to raise [pull requests](https://github.com/make-all/infrared-light/pulls).
 
