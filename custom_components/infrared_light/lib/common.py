@@ -36,9 +36,10 @@ def load_config(fname: str):
 
 
 def list_configs():
-    confdir = path("custom_components.infrared_light.devices")
     return [
-        f.name[:-5] for f in files(confdir) if f.is_file() and f.name.endswith(".yaml")
+        f.name[:-5]
+        for f in files("custom_components.infrared_light.devices")
+        if f.is_file() and f.name.endswith(".yaml")
     ]
 
 
