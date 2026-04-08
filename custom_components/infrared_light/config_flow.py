@@ -41,7 +41,7 @@ from .lib.common import load_config, list_config_options
 _LOGGER = logging.getLogger(__name__)
 
 
-class ConfigFlowHandler(ConfigFlow):
+class ConfigFlowHandler(ConfigFlow, domain=DOMAIN):
     """Handle a config flow for the infrared_light integration."""
 
     VERSION = 1
