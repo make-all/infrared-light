@@ -1,0 +1,21 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "This Infrared Light is already configured.",
+            "invalid_config_file": "The configuration file is invalid. Please check the file and try again.",
+            "no_infrared_emitters": "No infrared emitters found. Please configure at least one infrared emitter and try again.",
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "config_file": "Light model",
+                    "infrared_entity_id": "Infrared emitter"
+                },
+                "data_description": {
+                    "config_file": "Select the configuration file for your infrared light. This file should contain the necessary information to control your light.",
+                    "infrared_entity_id": "Select the infrared emitter entity that will be used to control the light. This entity should be able to send infrared signals within range of the light."
+                }
+            }
+        }
+    }
+}

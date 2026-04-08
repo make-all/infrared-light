@@ -1,0 +1,15 @@
+manufacturer: Aconic
+model: LED Controller 24key
+brightness_steps: 16
+commands:
+  type: NECCommand
+  device: 0xef00
+  codes:
+    - name: turn_on
+      code: 0x03
+    - name: turn_off
+      code: 0x02
+    - name: brightness_up
+      code: 0x00
+    - name: brightness_down
+      code: 0x01

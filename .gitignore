@@ -1,0 +1,17 @@
+/.idea/
+/.vs/
+/.vscode/
+/.env/
+/*.egg-info/
+/.coverage
+/coverage.xml
+__pycache__/
+.ruff_cache
+*.zip
+*~
+\#*\#
+*.orig
+*.rej
+.history
+.DS_Store
+Thumbs.db

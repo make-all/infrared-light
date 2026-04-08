@@ -1,0 +1,21 @@
+manufacturer: NEC
+model: RE0201-CH2
+brightness_steps: 10
+commands:
+  type: NECCommand
+  device: 0x6d82
+  codes:
+    - name: turn_on
+      code: 0x3d
+    - name: turn_off
+      multi:
+        - code: 0x3d
+          repeat: 9
+        - code: 0x3e
+          repeat: 2
+    - name: brightness_up
+      code: 0x3a
+    - name: brightness_down
+      code: 0x3b
+    - name: nightlight
+      code: 0x3c

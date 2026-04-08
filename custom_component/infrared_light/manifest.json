@@ -1,0 +1,14 @@
+{
+    "domain": "infrared_light",
+    "name": "Infrared Light",
+    "codeowners": [
+        "@make-all"
+    ],
+    "config_flow": true,
+    "dependencies": ["infrared"],
+    "documentation": "https://github.com/make-all/infrared-light",
+    "integration_type": "device",
+    "iot_class": "assumed_state",
+    "issue_tracker": "https://github.com/make-all/infrared-light/issues",
+    "version": "2026.4.0"
+}

@@ -1,0 +1,24 @@
+manufacturer: Silvercrest
+model: "14135502L"
+brightness_steps: 16
+color_temp_steps: 16
+color_temp_min: 2700
+color_temp_max: 6500
+commands:
+  type: NECCommand
+  device: 0x04
+  codes:
+    - name: turn_on
+      code: 0x05
+    - name: turn_off
+      code: 0x04
+    - name: brightness_up
+      code: 0x02
+    - name: brightness_down
+      code: 0x06
+    - name: color_temp_up
+      code: 0x07
+    - name: color_temp_down
+      code: 0x03
+    - name: nightlight
+      code: 0x08

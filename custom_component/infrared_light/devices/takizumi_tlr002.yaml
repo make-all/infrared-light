@@ -1,0 +1,27 @@
+manufacturer: Takizumi
+model: TLR-002
+brightness_steps: 16
+color_temp_steps: 16
+color_temp_min: 2700
+color_temp_max: 6500
+commands:
+  type: NECCommand
+  device: 0x5284
+  codes:
+    - name: turn_on
+      code: 0x32
+    - name: turn_off
+      multi:
+        - code: 0x32
+          repeat: 10
+        - code: 0x7c
+    - name: brightness_up
+      code: 0x50
+    - name: brightness_down
+      code: 0x74
+    - name: color_temp_up
+      code: 0x44
+    - name: color_temp_down
+      code: 0x60
+    - name: nightlight
+      code: 0x58
