@@ -22,7 +22,8 @@ from os.path import dirname, join
 from homeassistant.helpers.selector import SelectOptionDict
 from homeassistant.util.yaml import load_yaml
 
-import ..devices as CONFDIR
+import custom_components.infrared_light.devices as CONFDIR
+
 
 def load_config(fname: str):
     fname = join(dirname(CONFDIR.__file__), config_entry.data["config_file"] + ".yaml")
@@ -31,9 +32,11 @@ def load_config(fname: str):
     with open(fname) as f:
         return load_yaml(f)
 
+
 def list_configs():
     confdir = dirname(CONFDIR.__file__)
     return [f[:-5] for f in listdir(confdir) if f.endswith(".yaml")]
+
 
 def list_config_options():
     options = []
@@ -42,7 +45,9 @@ def list_config_options():
         manufacturer = config.get("manufacturer", "")
         model = config.get("model", "")
         if manufacturer and model:
-            options.append(SelectOptionDict(value=fname, label=f"{manufacturer} {model}"))
+            options.append(
+                SelectOptionDict(value=fname, label=f"{manufacturer} {model}")
+            )
         elif model:
             options.append(SelectOptionDict(value=fname, label=model))
         elif manufacturer:
