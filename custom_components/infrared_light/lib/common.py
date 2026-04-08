@@ -20,12 +20,12 @@ limitations under the License.
 from importlib.resources import contents, open_text
 
 from homeassistant.helpers.selector import SelectOptionDict
-from homeassistant.util.yaml import load_yaml
+from homeassistant.util.yaml import parse_yaml
 
 
 def load_config(fname: str):
     with open_text("custom_components.infrared_light.devices", fname + ".yaml") as f:
-        return load_yaml(f)
+        return parse_yaml(f)
 
 
 def list_configs():
