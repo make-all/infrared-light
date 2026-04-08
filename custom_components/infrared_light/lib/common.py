@@ -42,16 +42,8 @@ def list_config_options():
         config = load_config(fname)
         manufacturer = config.get("manufacturer", "")
         model = config.get("model", "")
-        if manufacturer and model:
-            options.append(
-                SelectOptionDict(value=fname, label=f"{manufacturer} {model}")
-            )
-        elif model:
-            options.append(SelectOptionDict(value=fname, label=model))
-        elif manufacturer:
-            options.append(SelectOptionDict(value=fname, label=manufacturer))
-        else:
-            options.append(SelectOptionDict(value=fname, label=fname))
+        label = f"{manufacturer} {model}".strip() or fname
+        options.append(SelectOptionDict(value=fname, label=label))
 
     # Ensure options are unique by label, disambiguating duplicates by appending value to the label
     seen_labels = set()
@@ -62,7 +54,7 @@ def list_config_options():
         else:
             seen_labels.add(option["label"])
 
-    for i, option in options:
+    for option in options:
         if option["label"] in duplicates:
             option["label"] += f" ({option['value']})"
 
