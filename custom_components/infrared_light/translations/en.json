@@ -3,7 +3,7 @@
         "abort": {
             "already_configured": "This Infrared Light is already configured.",
             "invalid_config_file": "The configuration file is invalid. Please check the file and try again.",
-            "no_infrared_emitters": "No infrared emitters found. Please configure at least one infrared emitter and try again.",
+            "no_infrared_emitters": "No infrared emitters found. Please configure at least one infrared emitter and try again."
         },
         "step": {
             "user": {
