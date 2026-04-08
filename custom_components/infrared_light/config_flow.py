@@ -97,7 +97,7 @@ class ConfigFlowHandler(ConfigFlow, domain=DOMAIN):
                 {
                     vol.Required(CONF_CONFIG): SelectSelector(
                         SelectSelectorConfig(
-                            options=[configs],
+                            options=configs,
                             mode=SelectSelectorMode.DROPDOWN,
                         )
                     ),
