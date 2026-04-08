@@ -57,13 +57,13 @@ def list_config_options():
     seen_labels = set()
     duplicates = set()
     for option in options:
-        if option.label in seen_labels:
-            duplicates.add(option.label)
+        if option["label"] in seen_labels:
+            duplicates.add(option["label"])
         else:
-            seen_labels.add(option.label)
+            seen_labels.add(option["label"])
 
     for i, option in options:
-        if option.label in duplicates:
-            option.label += f" ({option.value})"
+        if option["label"] in duplicates:
+            option["label"] += f" ({option['value']})"
 
     return options
