@@ -24,7 +24,10 @@ from homeassistant.util.yaml import load_yaml
 
 
 def load_config(fname: str):
-    fname = join(path("..devices"), config_entry.data["config_file"] + ".yaml")
+    fname = join(
+        path("custom_components.infrared_light.devices"),
+        config_entry.data["config_file"] + ".yaml",
+    )
     if not exists(fname):
         raise FileNotFoundError(f"Config file {fname} does not exist")
     with open(fname) as f:
@@ -32,7 +35,7 @@ def load_config(fname: str):
 
 
 def list_configs():
-    confdir = path("..devices")
+    confdir = path("custom_components.infrared_light.devices")
     return [f[:-5] for f in listdir(confdir) if f.endswith(".yaml")]
 
 
