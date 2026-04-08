@@ -32,7 +32,7 @@ from infrared_protocols.commands import Command, NECCommand
 
 from .lib.common import load_config
 from .lib.multi_command import MultiCommand
-from .const import DOMAIN
+from .const import DOMAIN, CONF_CONFIG, CONF_INFRARED_ENTITY_ID
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -58,7 +58,8 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
             config (TuyaEntityConfig): The entity config
         """
         super().__init__()
-        config = load_config(fname)
+        self._infrared_entity_id = config_entry.data[CONF_INFRARED_ENTITY_ID]
+        config = load_config(config_entry.data[CONF_CONFIG])
         cmds = config.get("commands", {})
         if not cmds:
             raise AttributeError("Config is missing commands")
@@ -132,7 +133,7 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
     async def _async_send_command(self, cmd):
         """Send a command to the device"""
         await infrared.async_send_command(
-            self._hass, self._infrared_entity_id, cmd, context=self._context
+            self.hass, self._infrared_entity_id, cmd, context=self._context
         )
 
     async def async_turn_on(self, **kwargs):
