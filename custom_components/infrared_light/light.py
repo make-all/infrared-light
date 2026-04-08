@@ -63,11 +63,11 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
         cmds = config.get("commands", {})
         if not cmds:
             raise AttributeError("Config is missing commands")
-        codes = commands.get("codes", {})
+        codes = cmds.get("codes", {})
         if not codes:
             raise AttributeError("Config is missing command codes")
-        self._default_device = commands.get("device")
-        self._default_type = commands.get("type")
+        self._default_device = cmds.get("device")
+        self._default_type = cmds.get("type")
         for cmd in codes:
             name = cmd.get("name")
             if not name:
