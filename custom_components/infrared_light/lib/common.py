@@ -22,17 +22,17 @@ from os.path import dirname, join
 from homeassistant.helpers.selector import SelectOptionDict
 from homeassistant.util.yaml import load_yaml
 
-import ..devices.__file__ as CONFDIR
+import ..devices as CONFDIR
 
 def load_config(fname: str):
-    fname = join(dirname(CONFDIR), config_entry.data["config_file"] + ".yaml")
+    fname = join(dirname(CONFDIR.__file__), config_entry.data["config_file"] + ".yaml")
     if not exists(fname):
         raise FileNotFoundError(f"Config file {fname} does not exist")
     with open(fname) as f:
         return load_yaml(f)
 
 def list_configs():
-    confdir = dirname(CONFDIR)
+    confdir = dirname(CONFDIR.__file__)
     return [f[:-5] for f in listdir(confdir) if f.endswith(".yaml")]
 
 def list_config_options():
