@@ -72,7 +72,7 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
             name = cmd.get("name")
             if not name:
                 raise AttributeError("Command is missing a name")
-            self._cmd[name] = _create_command(cmd)
+            self._cmd[name] = self._create_command(cmd)
 
         if "brightness_up" in self._cmd and "brightness_down" in self._cmd:
             self._attr_color_mode = ColorMode.BRIGHTNESS
