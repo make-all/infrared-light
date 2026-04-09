@@ -70,7 +70,7 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
         self._model = config.get("model", "Unknown")
         self._manufacturer = config.get("manufacturer", "Unknown")
         self._attr_unique_id = slugify(
-            f"{DOMAIN}_{self._infrared_entity_id}_{self._manufacturer}_{self._model}"
+            f"${self._infrared_entity_id}_{self._manufacturer}_{self._model}"
         )
         self._attr_has_entity_name = True
         # Model is often the remote model, so just use manufacturer
