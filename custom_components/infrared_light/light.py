@@ -33,6 +33,7 @@ from infrared_protocols.commands import Command, NECCommand
 
 from .lib.common import load_config
 from .lib.multi_command import MultiCommand
+from .lib.nec2_command import NEC2Command
 from .const import DOMAIN, CONF_CONFIG, CONF_INFRARED_ENTITY_ID
 
 _LOGGER = logging.getLogger(__name__)
