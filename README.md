@@ -1,4 +1,5 @@
-**This software is currently alpha quality** Once it is working for the author, this message will be updated, but until then, please do not download it expecting it to work. Bug reports are not needed at this time and will only overload the developer.
+**This software is currently beta quality** It has been tested, and sends data that decodes to the same NEC code to the emitter for single key presses. I am still figuring out how repeating commands work, and there may be a bug there, or it may be in the tuya-local infrared implementation which is still very new and untested. You are welcome to try it out, especially if you are using HA first-party supported infrared entities that should be better tested than my Tuya device.
+
 
 ![logo](custom_components/infrared_light/brand/icon.svg)
 
