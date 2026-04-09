@@ -50,5 +50,5 @@ class NEC2Command(NECCommand):
         for _ in range(self.repeatition_count):
             last_timing = timings[-1]
             timings[-1] = Timing(high_us=last_timing.high_us, low_us=frame_gap)
-            timings.extend(cmd.get_raw_timings())
+            timings.extend(super().get_raw_timings())
         return timings
