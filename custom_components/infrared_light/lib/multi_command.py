@@ -41,6 +41,6 @@ class MultiCommand(Command):
         for cmd in self._commands:
             if timings:
                 last = timings[-1]
-                timings[-1] = Timing(high_us=last.high_us, low_us.low_us = self._delay)
+                timings[-1] = Timing(high_us=last.high_us, low_us=self._delay)
             timings.extend(cmd.get_raw_timings())
         return timings
