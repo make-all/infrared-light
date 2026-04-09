@@ -98,7 +98,9 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
                 raise AttributeError("multi must be a list of commands to send")
             return MultiCommand([self._create_command(c) for c in multi])
         if type == "NECCommand":
-            return NECCommand(address=device, command=code, repeat_count=repeat)
+            return NECCommand(
+                address=device, command=code, repeat_count=repeat, modulation=38000
+            )
         raise AttributeError(f"Unsupported command type {type}")
 
     def _brightness_to_step(self, brightness):
