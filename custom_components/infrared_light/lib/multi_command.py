@@ -33,7 +33,7 @@ class MultiCommand(Command):
             delay (int): The delay between commands in milliseconds
         """
         self._commands = commands
-        self._delay = delay
+        self._delay = delayus
 
     def get_raw_timings(self) -> list[Timing]:
         """Get the raw timings for the command."""
