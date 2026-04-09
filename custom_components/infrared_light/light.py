@@ -45,7 +45,7 @@ type InfraredLightEntityConfig = ConfigEntry[
 
 
 async def async_setup_entry(hass, config_entry, async_add_entities):
-    light = await self.hass.async_add_executor_job(_create_light, config_entry)
+    light = await hass.async_add_executor_job(_create_light, config_entry)
     async_add_entities([light])
 
 
