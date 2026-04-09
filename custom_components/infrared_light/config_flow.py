@@ -76,7 +76,7 @@ class ConfigFlowHandler(ConfigFlow, domain=DOMAIN):
             manufacturer = config_contents.get("manufacturer", "Unknown")
             model = config_contents.get("model", "")
             title = config_contents.get(
-                "name", f"{manufacturer} {model} IR controlled light via {emitter}"
+                "name", f"{manufacturer} {model} IR light controlled via {emitter}"
             )
             # Process the user input and create the config entry
             return self.async_create_entry(

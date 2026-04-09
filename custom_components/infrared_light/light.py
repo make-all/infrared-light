@@ -28,6 +28,7 @@ from homeassistant.components.light import (
     LightEntity,
 )
 from homeassistant.helpers.restore_state import RestoreEntity
+from homeassistant.util import slugify
 from infrared_protocols.commands import Command, NECCommand
 
 from .lib.common import load_config
@@ -58,13 +59,36 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
             config (TuyaEntityConfig): The entity config
         """
         super().__init__()
+        _LOGGER.debug("Initializing Infrared Light with config: %s", config_entry.data)
         self._infrared_entity_id = config_entry.data[CONF_INFRARED_ENTITY_ID]
         config = load_config(config_entry.data[CONF_CONFIG])
+        self._model = config.get("model", "Unknown")
+        self._manufacturer = config.get("manufacturer", "Unknown")
+        self._attr_unique_id = slugify(
+            f"{DOMAIN}_{self._infrared_entity_id}_{self._manufacturer}_{self._model}"
+        )
+        self._attr_has_entity_name = True
+        # Model is often the remote model, so just use manufacturer
+        self._attr_name = None
+        self._device_info = {
+            "identifiers": {(DOMAIN, self._attr_unique_id)},
+            "name": f"{self._manufacturer} IR light".strip(),
+            "manufacturer": self._manufacturer,
+            "model": self._model,
+        }
         cmds = config.get("commands", {})
         if not cmds:
+            _LOGGER.error(
+                "%s config is missing commands",
+                config_entry.data[CONF_INFRARED_ENTITY_ID],
+            )
             raise AttributeError("Config is missing commands")
         codes = cmds.get("codes", {})
         if not codes:
+            _LOGGER.error(
+                "%s config is missing command codes",
+                config_entry.data[CONF_INFRARED_ENTITY_ID],
+            )
             raise AttributeError("Config is missing command codes")
         self._default_device = cmds.get("device")
         self._default_type = cmds.get("type")
@@ -72,6 +96,11 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
         for cmd in codes:
             name = cmd.get("name")
             if not name:
+                _LOGGER.error(
+                    "%s command is missing a name %s",
+                    config_entry.data[CONF_INFRARED_ENTITY_ID],
+                    cmd,
+                )
                 raise AttributeError("Command is missing a name")
             self._cmd[name] = self._create_command(cmd)
 
@@ -86,6 +115,7 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
             self._color_temp_steps = config.get("color_temp_steps", 1)
 
         self._attr_supported_color_modes = {self._attr_color_mode}
+        _LOGGER.debug("Finished initializing Infrared Light %s", self.name)
 
     def _create_command(self, cmd):
         """Create a Command from the config info"""
