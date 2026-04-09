@@ -45,11 +45,13 @@ type InfraredLightEntityConfig = ConfigEntry[
 
 
 async def async_setup_entry(hass, config_entry, async_add_entities):
-    await light = await self.hass.async_add_executor_job(_create_light, config_entry)
+    light = await self.hass.async_add_executor_job(_create_light, config_entry)
     async_add_entities([light])
 
+
 def _create_light(config_entry) -> InfraredLightEntity:
-        return InfraredLightEntity(config_entry)
+    return InfraredLightEntity(config_entry)
+
 
 class InfraredLightEntity(LightEntity, RestoreEntity):
     """Representation of a Infrared controlled Light Entity."""
