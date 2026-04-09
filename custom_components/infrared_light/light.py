@@ -137,6 +137,10 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
             return NECCommand(
                 address=device, command=code, repeat_count=repeat, modulation=38000
             )
+        elif type == "NEC2Command":
+            return NEC2Command(
+                address=device, command=code, repeat_count=repeat, modulation=38000
+            )
         raise AttributeError(f"Unsupported command type {type}")
 
     def _brightness_to_step(self, brightness):

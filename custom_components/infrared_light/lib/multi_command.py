@@ -19,13 +19,13 @@ limitations under the License.
 
 import logging
 
-from infrared_protocols.commands import Command, NECCommand, Timing
+from infrared_protocols.commands import Command, Timing
 
 
 class MultiCommand(Command):
     """A command that sends multiple commands in sequence."""
 
-    def __init__(self, commands: list[Command], delayus: int = 50000):
+    def __init__(self, commands: list[Command], delayus: int = 96000):
         """
         Initialise the multi command.
         Args:
@@ -39,6 +39,8 @@ class MultiCommand(Command):
         """Get the raw timings for the command."""
         timings = []
         for cmd in self._commands:
+            if timings:
+                last = timings[-1]
+                timings[-1] = Timing(high_us=last.high_us, low_us.low_us = self._delay)
             timings.extend(cmd.get_raw_timings())
-            timings.append(Timing(self._delay, True))
         return timings
