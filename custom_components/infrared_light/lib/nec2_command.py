@@ -34,7 +34,7 @@ class NEC2Command(NECCommand):
         Initialise an NEC2Command
         """
         self.repeatition_count = repeat_count
-        super.__init__(
+        super().__init__(
             address=address,
             command=command,
             modulation=modulation,
@@ -45,7 +45,7 @@ class NEC2Command(NECCommand):
         """Get the raw timings for the command."""
 
         frame_gap = 96000  # Gap to make total frame ~108ms
-        timings = super.get_raw_timings()
+        timings = super().get_raw_timings()
 
         for _ in range(self.repeatition_count):
             last_timing = timings[-1]
