@@ -36,7 +36,6 @@ select = [
   "Q",    # flake8-quotes
   "F",    # pyflakes
   "B",    # flake8-bugbear
-  "I",    # isort
   "S",    # flake8-bandit
   "A",    # flake8-builtins
   "LOG",  # flake8-logging
