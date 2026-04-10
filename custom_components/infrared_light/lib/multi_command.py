@@ -17,8 +17,6 @@ limitations under the License.
 
 """
 
-import logging
-
 from infrared_protocols.commands import Command, Timing
 
 

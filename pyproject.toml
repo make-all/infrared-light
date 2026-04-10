@@ -2,7 +2,7 @@
 name = "infrared-light"
 description = "A Home Assistant infrared device integration for IR controlled lights"
 version = "2026.4.0"
-requires-python = ">=3.13"
+requires-python = ">=3.14.2"
 dependencies = [
   "infrared-protocols~=1.1"
 ]

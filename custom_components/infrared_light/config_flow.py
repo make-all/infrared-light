@@ -19,10 +19,12 @@ limitations under the License.
 
 import logging
 from typing import Any
-import voluptuous as vol
 
+import voluptuous as vol
 from homeassistant.components.infrared import (
     DOMAIN as INFRARED_DOMAIN,
+)
+from homeassistant.components.infrared import (
     async_get_emitters,
 )
 from homeassistant.config_entries import ConfigFlow, ConfigFlowResult
@@ -35,8 +37,8 @@ from homeassistant.helpers.selector import (
     SelectSelectorMode,
 )
 
-from .const import DOMAIN, CONF_CONFIG, CONF_INFRARED_ENTITY_ID
-from .lib.common import load_config, list_config_options
+from .const import CONF_CONFIG, CONF_INFRARED_ENTITY_ID, DOMAIN
+from .lib.common import list_config_options, load_config
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -48,7 +50,7 @@ class ConfigFlowHandler(ConfigFlow, domain=DOMAIN):
     MINOR_VERSION = 0
 
     async def async_step_user(
-        self, user_input: Dict[str, Any] | None = None
+        self, user_input: dict[str, Any] | None = None
     ) -> ConfigFlowResult:
         """Handle the user config step."""
         if user_input is not None:

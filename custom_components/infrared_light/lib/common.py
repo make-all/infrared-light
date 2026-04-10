@@ -45,7 +45,7 @@ def list_config_options():
         label = f"{manufacturer} {model}".strip() or fname
         options.append(SelectOptionDict(value=fname, label=label))
 
-    # Ensure options are unique by label, disambiguating duplicates by appending value to the label
+    # Ensure options are unique by label, disambiguating by appending value
     seen_labels = set()
     duplicates = set()
     for o in options:

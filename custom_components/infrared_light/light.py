@@ -18,7 +18,6 @@ limitations under the License.
 """
 
 import logging
-from typing import Optional
 
 from homeassistant.components import infrared
 from homeassistant.components.light import (
@@ -29,20 +28,14 @@ from homeassistant.components.light import (
 )
 from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.util import slugify
-from infrared_protocols.commands import Command, NECCommand
+from infrared_protocols.commands import NECCommand
 
+from .const import CONF_CONFIG, CONF_INFRARED_ENTITY_ID, DOMAIN
 from .lib.common import load_config
 from .lib.multi_command import MultiCommand
 from .lib.nec2_command import NEC2Command
-from .const import DOMAIN, CONF_CONFIG, CONF_INFRARED_ENTITY_ID
 
 _LOGGER = logging.getLogger(__name__)
-
-type InfraredLightEntityConfig = ConfigEntry[
-    {
-        "config_file": str,
-    }
-]
 
 
 async def async_setup_entry(hass, config_entry, async_add_entities):
@@ -125,7 +118,7 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
 
     def _create_command(self, cmd):
         """Create a Command from the config info"""
-        type = cmd.get("type", self._default_type)
+        cmd_type = cmd.get("type", self._default_type)
         device = cmd.get("device", self._default_device)
         code = cmd.get("code")
         repeat = cmd.get("repeat", 1)
@@ -134,11 +127,11 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
             if not isinstance(multi, list):
                 raise AttributeError("multi must be a list of commands to send")
             return MultiCommand([self._create_command(c) for c in multi])
-        if type == "NECCommand":
+        if cmd_type == "NECCommand":
             return NECCommand(
                 address=device, command=code, repeat_count=repeat, modulation=38000
             )
-        elif type == "NEC2Command":
+        elif cmd_type == "NEC2Command":
             return NEC2Command(
                 address=device, command=code, repeat_count=repeat, modulation=38000
             )
@@ -189,7 +182,8 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
             self._attr_is_on = True
             did_something = True
 
-        # if brightness is 1, we treat that as nightlight mode and send the nightlight command if we have one
+        # if brightness is 1, treat that as nightlight mode and send
+        # the nightlight command if we have one
         if (
             ATTR_BRIGHTNESS in kwargs
             and kwargs[ATTR_BRIGHTNESS] == 1
@@ -223,7 +217,7 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
                 did_something = True
             elif steps > 1:
                 cmd_list = []
-                for i in range(int(steps)):
+                for _ in range(int(steps)):
                     cmd_list.append(cmd)
                 await self._async_send_command(MultiCommand(cmd_list))
                 self._attr_brightness = self._step_to_brightness(target)
@@ -255,13 +249,13 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
                 did_something = True
             elif steps > 1:
                 cmd_list = []
-                for i in range(int(steps)):
+                for _ in range(int(steps)):
                     cmd_list.append(cmd)
                 await self._async_send_command(MultiCommand(cmd_list))
                 self._attr_color_temp_kelvin = self._step_to_color_temp(target)
                 did_something = True
 
-        # If we didn't send any command, send an on command to ensure the light is in sync
+        # If we didn't send any command, send "on" to ensure the light is in sync
         if not did_something and "turn_on" in self._cmd:
             await self._async_send_command(self._cmd["turn_on"])
             self._attr_is_on = True
