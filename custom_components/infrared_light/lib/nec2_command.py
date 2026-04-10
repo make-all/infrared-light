@@ -42,7 +42,13 @@ class NEC2Command(NECCommand):
     def get_raw_timings(self) -> list[Timing]:
         """Get the raw timings for the command."""
 
-        frame_gap = 96000  # Gap to make total frame ~108ms
+        # Gap (reduced from NECCommand default to match captured codes)
+        frame_gap = 40500
+        # According to docs on the protocol, it should be around 40.5ms, so it seems
+        # HA is wrong. Actual observation is about 42ms, but it is probably better
+        # to follow the theoretical spec, as the other timings are based on that and
+        # off from the observed timings also.
+
         timings = super().get_raw_timings()
 
         for _ in range(self.repeatition_count):
