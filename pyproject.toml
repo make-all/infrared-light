@@ -47,4 +47,5 @@ select = [
   
 ]
 [tool.pytest.ini_options]
-asyncio_mode
+asyncio_mode = "auto"
+
