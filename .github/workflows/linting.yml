@@ -1,0 +1,32 @@
+name: Linting
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      contents: read
+      pull-requests: write
+    env:
+      UV_SYSTEM_PYTHON: 1
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+      - name: Python lint
+        run: uv run ruff check --output-format=github .
+      - name: Python include order
+        run: uv run ruff check --select I --diff .
+      - name: Python coding style
+        run: uv run ruff format --check --diff .
+      - name: YAML lint
+        run: uv run yamllint --format github custom_components/infrared_light/devices

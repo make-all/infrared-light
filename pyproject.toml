@@ -1,0 +1,50 @@
+[project]
+name = "infrared-light"
+description = "A Home Assistant infrared device integration for IR controlled lights"
+version = "2026.4.0"
+requires-python = ">=3.13"
+dependencies = [
+  "infrared-protocols~=1.1"
+]
+readme = "README.md"
+license = "Apache-2.0"
+license-file = "LICENSE.md"
+
+[project.urls]
+source="https://github.com/make-all/infrared-light/"
+issues="https://github.com/make-all/infrared-light/issues"
+
+[dependency-groups]
+dev = [
+  "pytest-homeassistant-custom-component==0.13.322",
+  "pytest",
+  "pytest-asyncio",
+  "pytest-cov",
+  "pytest-mock",
+  "ruff",
+  "yamllint",
+]
+
+[tool.ruff]
+target-version = "py314"
+
+[tool.ruff.lint]
+select = [
+  "E",    # pycodestyle
+  "W",    # pycodestyle warnings
+  "N",    # PEP8 naming
+  "Q",    # flake8-quotes
+  "F",    # pyflakes
+  "B",    # flake8-bugbear
+  "I",    # isort
+  "S",    # flake8-bandit
+  "A",    # flake8-builtins
+  "LOG",  # flake8-logging
+  "PT",   # flake8-pytest-style
+  "UP",   # pyupgrade
+  "SIM",  # flake8-simplify
+  "FURB", # refurb
+  
+]
+[tool.pytest.ini_options]
+asyncio_mode
