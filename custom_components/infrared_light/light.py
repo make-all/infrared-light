@@ -114,7 +114,11 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
             self._color_temp_steps = config.get("color_temp_steps", 1)
 
         self._attr_supported_color_modes = {self._attr_color_mode}
-        _LOGGER.debug("Finished initializing Infrared Light %s", self.name)
+        _LOGGER.debug(
+            "Finished initializing Infrared Light %s %s",
+            self._manufacturer,
+            self._model,
+        )
 
     def _create_command(self, cmd):
         """Create a Command from the config info"""
@@ -178,7 +182,9 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
 
         # turn on if off and we have a command for it
         if self._attr_is_on is not True and "turn_on" in self._cmd:
-            _LOGGER.info("%s sending turn on command", self.name)
+            _LOGGER.info(
+                "%s %s sending turn on command", self._manufacturer, self._model
+            )
             await self._async_send_command(self._cmd["turn_on"])
             self._attr_is_on = True
             did_something = True
@@ -190,7 +196,9 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
             and kwargs[ATTR_BRIGHTNESS] == 1
             and self._cmd.get("nightlight")
         ):
-            _LOGGER.info("%s sending nightlight command", self.name)
+            _LOGGER.info(
+                "%s %s sending nightlight command", self._manufacturer, self._model
+            )
             await self._async_send_command(self._cmd["nightlight"])
             self._attr_brightness = 1
             did_something = True
@@ -215,8 +223,9 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
                 cmd = self._cmd["brightness_up"]
             if steps == 1:
                 _LOGGER.info(
-                    "%s sending brightness %s command",
-                    self.name,
+                    "%s %s sending brightness %s command",
+                    self._manufacturer,
+                    self._model,
                     "up" if target > current else "down",
                 )
                 await self._async_send_command(cmd)
@@ -225,8 +234,9 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
             elif steps > 1:
                 cmd_list = []
                 _LOGGER.info(
-                    "%s sending %d brightness %s commands",
-                    self.name,
+                    "%s %s sending %d brightness %s commands",
+                    self._manufacturer,
+                    self._model,
                     steps,
                     "up" if target > current else "down",
                 )
@@ -258,8 +268,9 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
 
             if steps == 1:
                 _LOGGER.info(
-                    "%s sending color temp %s command",
-                    self.name,
+                    "%s %s sending color temp %s command",
+                    self._manufacturer,
+                    self._model,
                     "up" if target > current else "down",
                 )
                 await self._async_send_command(cmd)
@@ -270,8 +281,9 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
                 for _ in range(int(steps)):
                     cmd_list.append(cmd)
                 _LOGGER.info(
-                    "%s sending %d color temp %s commands",
-                    self.name,
+                    "%s %s sending %d color temp %s commands",
+                    self._manufacturer,
+                    self._model,
                     steps,
                     "up" if target > current else "down",
                 )
@@ -281,7 +293,11 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
 
         # If we didn't send any command, send "on" to ensure the light is in sync
         if not did_something and "turn_on" in self._cmd:
-            _LOGGER.info("%s sending turn on command to resync", self.name)
+            _LOGGER.info(
+                "%s %s sending turn on command to resync",
+                self._manufacturer,
+                self._model,
+            )
             await self._async_send_command(self._cmd["turn_on"])
             self._attr_is_on = True
 
@@ -290,7 +306,9 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
     async def async_turn_off(self, **kwargs):
         """Turn the light off."""
         if "turn_off" in self._cmd:
-            _LOGGER.info("%s sending turn off command", self.name)
+            _LOGGER.info(
+                "%s %s sending turn off command", self._manufacturer, self._model
+            )
             await self._async_send_command(self._cmd["turn_off"])
             self._attr_is_on = False
             self.async_write_ha_state()

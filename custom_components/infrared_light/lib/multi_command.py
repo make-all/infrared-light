@@ -23,12 +23,12 @@ from infrared_protocols.commands import Command, Timing
 class MultiCommand(Command):
     """A command that sends multiple commands in sequence."""
 
-    def __init__(self, commands: list[Command], delayus: int = 96000):
+    def __init__(self, commands: list[Command], delayus: int = 400000):
         """
         Initialise the multi command.
         Args:
             commands (list[Command]): The list of commands to send in sequence
-            delay (int): The delay between commands in milliseconds
+            delay (int): The delay between commands in microseconds
         """
         self._commands = commands
         self._delay = delayus
