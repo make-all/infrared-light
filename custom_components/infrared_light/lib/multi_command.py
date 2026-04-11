@@ -28,7 +28,7 @@ class MultiCommand(Command):
         Initialise the multi command.
         Args:
             commands (list[Command]): The list of commands to send in sequence
-            delay (int): The delay between commands in microseconds
+            delayus (int): The delay between commands in microseconds
         """
         self._commands = commands
         self._delay = delayus

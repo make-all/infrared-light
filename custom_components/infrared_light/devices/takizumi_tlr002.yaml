@@ -5,7 +5,7 @@ color_temp_steps: 16
 color_temp_min: 2700
 color_temp_max: 6500
 commands:
-  type: NEC2Command
+  type: NECCommand
   device: 0x5284
   codes:
     - name: turn_on

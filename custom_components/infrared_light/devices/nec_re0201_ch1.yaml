@@ -8,11 +8,10 @@ commands:
     - name: turn_on
       code: 0xbd
     - name: turn_off
-      multi:
-        - code: 0xbd
-          repeat: 9
-        - code: 0xbe
-          repeat: 2
+      # multi:
+      #   - code: 0xbd
+      #     repeat: 9
+      code: 0xbe
     - name: brightness_up
       code: 0xba
     - name: brightness_down
