@@ -1,0 +1,16 @@
+manufacturer: Toshiba
+model: FRC-199T-Ch1
+commands:
+  type: NECCommand
+  device: 0x0ce7
+  codes:
+    - name: turn_on
+      code: 0xa2
+    - name: turn_off
+      code: 0x8b
+    - name: brightness_up
+      code: 0x9b
+    - name: brightness_down
+      code: 0x9f
+    - name: nightlight
+      code: 0x8f

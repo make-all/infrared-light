@@ -1,4 +1,4 @@
-**This software is currently beta quality** It has been tested, and sends data that decodes to the same NEC code to the emitter for single key presses. I am still figuring out how repeating commands work, and there may be a bug there, or it may be in the tuya-local infrared implementation which is still very new and untested. You are welcome to try it out, especially if you are using HA first-party supported infrared entities that should be better tested than my Tuya device.
+**This software is currently beta quality** Basic single commands work, but repeated commands may have issues, making brightness and color temperature control erratic, at least on Tuya emitters (which could just as well be an issue with those devices or the tuya-local implementation of infrared as with this integration).
 
 
 ![logo](custom_components/infrared_light/brand/icon.svg)
@@ -18,7 +18,7 @@ For details of infrared device setup, see the [Home Assistant documentation](htt
 
 **RGB colors** are not currently supported.
 
-**Nightlight** feature common on these lights is supported by mapping the nightlight to a `brightness_value` of 1. This is generally not selectable from the UI, so cannot be accidentally toggled, but can be sent from automations (which can be triggered by a dedicated button).
+**Nightlight** feature common on ceiling lights is supported by mapping the nightlight to a `brightness_value` of 1. This is generally not selectable from the UI, so cannot be accidentally toggled, but can be sent from automations (which can be triggered by a dedicated button).
 
 **Remote protocols** Currently only remotes using NEC based protocols (including NEC Extended) are supported.
 Low level protocol support is provided by the infrared-protocols library, maintained by the Home Assistant team.
@@ -29,3 +29,4 @@ Low level protocol support is provided by the infrared-protocols library, mainta
 - Takizumi lights with TLR-002 remote
 - Aconic lights with LED Controller 24key remote
 - Silvercrest lights with 14135502L remote
+- Toshiba lights with FRC-199T remote
