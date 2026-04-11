@@ -12,11 +12,11 @@ commands:
       code: 0x32
       repeat: 2
     - name: turn_off
-      multi:
-        - code: 0x32
-          repeat: 10
-        - code: 0x7c
-          repeat: 2
+      # multi:
+      #   - code: 0x32
+      #     repeat: 10
+      code: 0x7c
+      repeat: 3
     - name: brightness_up
       code: 0x50
       repeat: 2
