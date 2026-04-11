@@ -10,25 +10,18 @@ commands:
   codes:
     - name: turn_on
       code: 0x32
-      repeat: 2
     - name: turn_off
       # multi:
       #   - code: 0x32
       #     repeat: 10
       code: 0x7c
-      repeat: 3
     - name: brightness_up
       code: 0x50
-      repeat: 2
     - name: brightness_down
       code: 0x74
-      repeat: 2
     - name: color_temp_up
       code: 0x44
-      repeat: 2
     - name: color_temp_down
       code: 0x60
-      repeat: 2
     - name: nightlight
       code: 0x58
-      repeat: 2
