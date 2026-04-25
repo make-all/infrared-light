@@ -1,7 +1,7 @@
 [project]
 name = "infrared-light"
 description = "A Home Assistant infrared device integration for IR controlled lights"
-version = "2026.4.0"
+version = "2026.4.1"
 requires-python = ">=3.14.2"
 dependencies = [
   "infrared-protocols~=1.1"
@@ -47,4 +47,3 @@ select = [
 ]
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-

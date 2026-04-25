@@ -32,8 +32,6 @@ from infrared_protocols.commands import NECCommand
 
 from .const import CONF_CONFIG, CONF_INFRARED_ENTITY_ID, DOMAIN
 from .lib.common import load_config
-from .lib.multi_command import MultiCommand
-from .lib.nec2_command import NEC2Command
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -126,17 +124,13 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
         device = cmd.get("device", self._default_device)
         code = cmd.get("code")
         repeat = cmd.get("repeat", 1)
-        multi = cmd.get("multi")
-        if multi:
-            if not isinstance(multi, list):
-                raise AttributeError("multi must be a list of commands to send")
-            return MultiCommand([self._create_command(c) for c in multi])
+        # multi = cmd.get("multi")
+        # if multi:
+        #     if not isinstance(multi, list):
+        #         raise AttributeError("multi must be a list of commands to send")
+        #     return MultiCommand([self._create_command(c) for c in multi])
         if cmd_type == "NECCommand":
             return NECCommand(
-                address=device, command=code, repeat_count=repeat, modulation=38000
-            )
-        elif cmd_type == "NEC2Command":
-            return NEC2Command(
                 address=device, command=code, repeat_count=repeat, modulation=38000
             )
         raise AttributeError(f"Unsupported command type {type}")
@@ -162,9 +156,9 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
     def _step_to_color_temp(self, step):
         """Convert a step index to a color temp value"""
         return round(
-            step
-            * (
-                (self._attr_max_color_temp_kelvin - self._attr_min_color_temp_kelvin)
+            (
+                step
+                * (self._attr_max_color_temp_kelvin - self._attr_min_color_temp_kelvin)
                 / self._color_temp_steps
             )
             + self._attr_min_color_temp_kelvin
@@ -232,7 +226,6 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
                 self._attr_brightness = self._step_to_brightness(target)
                 did_something = True
             elif steps > 1:
-                cmd_list = []
                 _LOGGER.info(
                     "%s %s sending %d brightness %s commands",
                     self._manufacturer,
@@ -241,8 +234,7 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
                     "up" if target > current else "down",
                 )
                 for _ in range(int(steps)):
-                    cmd_list.append(cmd)
-                await self._async_send_command(MultiCommand(cmd_list))
+                    await self._async_send_command(cmd)
                 self._attr_brightness = self._step_to_brightness(target)
                 did_something = True
 
@@ -277,9 +269,6 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
                 self._attr_color_temp_kelvin = self._step_to_color_temp(target)
                 did_something = True
             elif steps > 1:
-                cmd_list = []
-                for _ in range(int(steps)):
-                    cmd_list.append(cmd)
                 _LOGGER.info(
                     "%s %s sending %d color temp %s commands",
                     self._manufacturer,
@@ -287,7 +276,8 @@ class InfraredLightEntity(LightEntity, RestoreEntity):
                     steps,
                     "up" if target > current else "down",
                 )
-                await self._async_send_command(MultiCommand(cmd_list))
+                for _ in range(int(steps)):
+                    await self._async_send_command(cmd)
                 self._attr_color_temp_kelvin = self._step_to_color_temp(target)
                 did_something = True
 

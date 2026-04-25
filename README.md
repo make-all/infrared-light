@@ -1,5 +1,4 @@
-**This software is currently beta quality** Basic single commands work, but repeated commands may have issues, making brightness and color temperature control erratic, at least on Tuya emitters (which could just as well be an issue with those devices or the tuya-local implementation of infrared as with this integration).
-
+**This software is currently beta quality** Basic single commands work, and repeated brightness commands work, but color temperature control seems erratic, though it may just be my device.
 
 ![logo](custom_components/infrared_light/brand/icon.svg)
 
