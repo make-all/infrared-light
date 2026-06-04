@@ -28,7 +28,7 @@ from homeassistant.components.light import (
 )
 from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.util import slugify
-from infrared_protocols.commands import NECCommand
+from infrared_protocols.commands.nec import NECCommand
 
 from .const import CONF_CONFIG, CONF_INFRARED_ENTITY_ID, DOMAIN
 from .lib.common import load_config
