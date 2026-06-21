@@ -7,6 +7,10 @@ Please report any [issues](https://github.com/make-all/infrared-light/issues) an
 This is a Home Assistant integration to support lights controllable via infrared emitters.
 For details of infrared device setup, see the [Home Assistant documentation](https://www.home-assistant.io/integrations/infrared/)
 
+### Installation
+
+The easiest way to install this custom component is via HACS. Just search for "Infrared Lights", install, then setup through Settings / Devices & Services / Add Integration.
+
 ### Functional details
 
 **Basic turn on/off** is of course supported. For lights that support a memory function, turn on uses the memory recall function, and turn off invokes a save memory command before the turn off.
@@ -29,3 +33,4 @@ Low level protocol support is provided by the infrared-protocols library, mainta
 - Aconic lights with LED Controller 24key remote
 - Silvercrest lights with 14135502L remote
 - Toshiba lights with FRC-199T remote
+
